@@ -1,10 +1,47 @@
 <!doctype html>
-<html>
-
+<html ng-app="toolsApp">
 <head>
+	
+	<!-- Angular.js -->
+	<script src="bower_components/angular/angular.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="styles.css" />
+	
 </head>
 
-<body>
+<body ng-controller="toolsController">
+	<h1>Polling chart maker!</h1>
+	
+	<div id="content">
+
+		<div id="raw">
+			<label>Paste your spreadsheet here</label>
+			<textarea ng-model="raw" ng-change="absorbRaw()"></textarea>
+		</div>
+		
+
+		<div id="rendered">
+			<label>Chart preview</label>
+			<div class="andrew-bar" style="position: relative" ng-repeat="datum in data">
+				<div class="andrew-color" style="width: {{datum.percent}}% !important; background-color: #cd6966; position: absolute; width: 100%; height: 100%; left: 0; top: 0; z-index: 1"></div>
+				<div class="andrew-text" style="padding: 3px 0px 5px 5px; margin-bottom:3px; position: relative; z-index: 2; font-weight: bold; color: rgba(255,255,255,.8)">
+					{{datum.name}}: {{datum.amount}}%
+				</div>
+			</div>
+		</div>
+
+		<div id="embed">
+			<label>Here's your embed code</label>
+			<textarea ng-bind="makeEmbed()"></textarea>
+		</div>
+	</div>
+	
+	
+	
+	
+
 </body>
+
+<script src="app.js"></script>
 
 </html>
