@@ -7,23 +7,35 @@ app = angular.module("toolsApp", [])
 	$scope.raw = "Trump	27\nCarson	21\nCruz	9\nBush	6";
 	
 	$scope.absorbRaw = function(){
+		$scope.error = null;
 		$scope.data.length = 0;
-		var temp = $scope.raw.split("\n");
-		temp.forEach(function(row){
-			row = row.split("\t");
-			console.log(row);
-			$scope.data.push({name: row[0], amount: parseInt(row[1]) });
-		});
-		
-		var max = Math.max.apply(null, $scope.data.map(function(d){ return d.amount }));
-		$scope.data.forEach(function(datum){
+		if( $scope.raw.indexOf("\n") == -1){
+			$scope.error = "Looks like all your data is on one line?";
+		} else{
+			var temp = $scope.raw.split("\n");
+			temp.forEach(function(row){
+				if(!$scope.error){
+					if( row.indexOf("\t") == -1 )
+						$scope.error = "Looks like at least one of your rows is missing a tab?" 
+				}
+				row = row.split("\t");
+				console.log(row);
+				$scope.data.push({name: row[0], amount: parseInt(row[1]) });
+			});
 
-			datum.percent = datum.amount / max * 100;
-		});
+			if(!$scope.error){
+				var max = Math.max.apply(null, $scope.data.map(function(d){ return d.amount }));
+				$scope.data.forEach(function(datum){
+
+					datum.percent = datum.amount / max * 100;
+				});
+
+				$scope.data.sort(function(a,b){
+					return b.amount - a.amount;
+				});
+			}
+		}
 		
-		$scope.data.sort(function(a,b){
-			return b.amount - a.amount;
-		});
 	}
 	
 	$scope.makeEmbed = function(){
