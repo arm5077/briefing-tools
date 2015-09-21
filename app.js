@@ -43,7 +43,7 @@ app = angular.module("toolsApp", [])
 		$scope.data.forEach(function(datum){
 			exportString += '<div class="andrew-bar" style="position: relative">' +
 				'<div class="andrew-color" style="width: ' + datum.percent + '% !important; background-color: #cd6966; position: absolute; width: 100%; height: 100%; left: 0; top: 0; z-index: 1"></div>' +
-				'<div class="andrew-text" style="padding: 3px 0px 5px 5px; margin-bottom:3px; position: relative; z-index: 2; font-weight: bold; color: rgba(255,255,255,.8)">' +
+				'<div class="andrew-text" style="padding: 3px 0px 5px 5px; margin-bottom:3px; position: relative; z-index: 2; font-weight: bold; color: rgba(255,255,255,.8) !important">' +
 					datum.name + ': ' + datum.amount + '%' +
 				'</div>' +
 			'</div>';
