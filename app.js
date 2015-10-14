@@ -39,7 +39,7 @@ app = angular.module("toolsApp", [])
 	}
 	
 	$scope.makeEmbed = function(){
-		var exportString = "";
+		var exportString = "<style>.andrew-bar .briefing-headline-source { color: rgba(255,255,255,.8)}</style>";
 		$scope.data.forEach(function(datum){
 			exportString += '<div class="andrew-bar" style="position: relative">' +
 				'<div class="andrew-color" style="width: ' + datum.percent + '% !important; background-color: #cd6966; position: absolute; width: 100%; height: 100%; left: 0; top: 0; z-index: 1"></div>' +
